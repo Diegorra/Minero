@@ -1,0 +1,24 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+#include <ObjectArray.h>
+#pragma once
+
+//TIPOS
+typedef enum { LIBRE, TIERRA, GEMA, PIEDRA, MURO, SALIDA, DINAMITA, MINERO }tCasilla;
+
+const int MAX = 50;
+
+typedef tCasilla tPlano[MAX][MAX];
+
+typedef struct {
+	tPlano plano;
+	int nFilas = 0, nColumnas = 0;
+	int x = 0, y = 0;
+}tMina;
+
+//PROTOTIPOS
+void cargar_Mina(ifstream &fichero, tMina &mina);
+void dibujar1_1(const tMina &mina);
+void dibujar1_3(const tMina &mina);
+void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j);
