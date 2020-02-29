@@ -10,8 +10,10 @@ typedef enum { LIBRE, TIERRA, GEMA, PIEDRA, MURO, SALIDA, DINAMITA, MINERO }tCas
 const int MAX = 50;
 
 typedef tCasilla tPlano[MAX][MAX];
+typedef char tPlanoCaracteres[3 * MAX][3 * MAX];
+typedef int tPlanoColores[3 * MAX][3 * MAX];
 
-typedef struct {
+typedef struct{
 	tPlano plano;
 	int nFilas = 0, nColumnas = 0;
 	int x = 0, y = 0;
