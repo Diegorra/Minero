@@ -45,7 +45,6 @@ int menu1()
 		cout << "ERROR debe introducir un numero entre 0 y 3" << endl;
 		cin >> opcion;
 	}
-	system("CLEAR");
 	return opcion;
 }
 
@@ -61,7 +60,6 @@ int menu2()
 		cout << "ERROR debe introducir un numero entre 0 y 3" << endl;
 		cin >> opcion;
 	}
-	system("CLEAR");
 	return opcion;
 }
 
@@ -76,7 +74,6 @@ int menu3()
 		cout << "ERROR debe introducir un numero entre 0 y 3" << endl;
 		cin >> opcion;
 	}
-	system("CLEAR");
 	return opcion;
 }
 
