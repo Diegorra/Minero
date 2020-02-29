@@ -1,8 +1,8 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 using namespace std;
 #include <ObjectArray.h>
-#pragma once
 
 //TIPOS
 typedef enum { LIBRE, TIERRA, GEMA, PIEDRA, MURO, SALIDA, DINAMITA, MINERO }tCasilla;

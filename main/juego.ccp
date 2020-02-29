@@ -3,4 +3,3 @@
 using namespace std;
 #include <ObjectArray.h>
 #include "juego.h"
-#include "mina.ccp"

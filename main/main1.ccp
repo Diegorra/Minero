@@ -2,7 +2,7 @@
 #include <iostream>;
 #include <fstream>
 using namespace std;
-#include "juego.ccp"
+#include "juego.h"
 //TIPOS
 typedef enum { ARRIBA, ABAJO, DRCHA, IZDA, SALIR, NADA, TNT }tTeca;
 //PROTOTIPOS
@@ -21,4 +21,24 @@ int menu() {
 	system("CLEAR");
 	
 	return opcion;
+}
+
+int main(){
+	int opcion;
+	opcion = menu();
+	switch(opcion){
+		case 1:
+		{
+			///
+		}
+		break;
+		case 2:
+		{
+			///
+		}break;
+		case 0:
+		{
+			///
+		}break;
+	}
 }
