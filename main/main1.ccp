@@ -14,9 +14,9 @@ void colorFondo(int color);
 
 int main()
 {
-	int opcion;
-	opcion = menu();
-	switch(opcion){
+	int opcion1;
+	opcion1 = menu1();
+	switch(opcion1){
 		case 1:
 		{
 			///

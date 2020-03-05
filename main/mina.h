@@ -20,7 +20,8 @@ typedef struct{
 }tMina;
 
 //PROTOTIPOS
-void cargar_Mina(ifstream &fichero, string nombre, tMina &mina);
+void cargar_Mina(ifstream &fichero, tMina &mina);
+tCasilla char2tCasilla(char c);
 void dibujar1_1(const tMina &mina);
 void dibujar1_3(const tMina &mina);
 void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j);
