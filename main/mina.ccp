@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <windows.h>
 using namespace std;
 #include <ObjectArray.h>
 #include "mina.h"
@@ -14,8 +15,9 @@ void cargar_Mina(ifstream &fichero, tMina & mina){//He añadido el nombre debido
     fichero.get(c);
     for(int i=0;i < mina.nFilas;i++){
         for(int j = 0; j < mina.nColumnas; j++){
-            fichero.get(c); 
-            mina.plano[i][j]= conversion_tipos(c);// asignamos al plano lo que corresponda o un muro o una gema...
+            fichero.get(c);
+            casilla = char2tCasilla(c);
+            mina.plano[i][j]= casilla;// asignamos al plano lo que corresponda o un muro o una gema...
             if(mina.plano[i][j] == MINERO){ // Si encontramos el tipo minero guardamos sus coordenadas
                 i= mina.x;
                 j= mina.y;
@@ -27,40 +29,40 @@ void cargar_Mina(ifstream &fichero, tMina & mina){//He añadido el nombre debido
 tCasilla char2tCasilla(char c){
     tCasilla cas;
      switch (c){
-        case " ":{
+        case ' ':{
             cas = LIBRE;
         }
         break;
-        case "T":{
+        case 'T':{
             cas = TIERRA;
         }
         break;
-        case "G":
+        case 'G':
         {
             cas = GEMA;
         }
         break;
-        case "P":
+        case 'P':
         {
             cas = PIEDRA;
         }
         break;
-        case "M":
+        case 'M':
         {
             cas = MURO;
         }
         break;
-        case "S":
+        case 'S':
         {
             cas = SALIDA;
         }
         break;
-        case "D":
+        case'D':
         {
             cas = DINAMITA;
         }
         break;
-        case "":
+        case 'J':
         {
             cas = MINERO;
         }
@@ -68,6 +70,55 @@ tCasilla char2tCasilla(char c){
     }
     return cas;
 }
-void dibujar1_1(const tMina &mina){}
+char tCasilla2char(const tMina &mina, int posX, int posY){
+    char c;
+    switch(mina.plano[posX][posY]){
+        case 0:{
+           c = ' '; 
+           colorFondo(6); 
+        }break;
+        case 1:{
+            c = '.';
+            colorFondo(6);
+        }break;
+        case 2:{
+            c = 'G';
+            colorFondo(10);
+        }break;
+        case 3:{
+            c = '@';
+            colorFondo(6);
+        }break;
+        case 4:{
+            c = 'X';
+            colorFondo(6);
+        }break;
+        case 5:{
+            c = 'S';
+            colorFondo(2);
+        }break;
+        case 6:{
+            c = 'D';
+            colorFondo(1);
+        }break;
+        case 7:{
+            c = 'M';
+            colorFondo(8);
+        }break;
+    }
+}
+void colorFondo(int color){
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(handle, 15 | (color << 4));
+}
+void dibujar1_1(const tMina &mina){
+    for(int i=0; i< mina.nFilas; i++){
+        for(int j=0; j< mina.nColumnas; j++){
+            cout << tCasilla2char(mina, i, j);
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
 void dibujar1_3(const tMina &mina){}
 void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j){}

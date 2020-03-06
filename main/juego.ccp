@@ -6,7 +6,7 @@ using namespace std;
 #include <ObjectArray.h>
 #include "juego.h"
 
-bool cargar_Juego(tJuego &juego, int nivel){
+bool cargar_Juego(tJuego &juego, int &nivel){
     string aux;
     tMina mina;
     aux = to_string(nivel);

@@ -28,7 +28,7 @@ int main()
 		}break;
 		case 0:
 		{
-			///
+			system("EXIT");
 		}break;
 	}
 }

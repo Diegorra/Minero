@@ -15,6 +15,6 @@ typedef struct {
 }tJuego;
 
 //PROTOTIPOS
-bool cargar_Juego(tJuego &juego, int nivel);
+bool cargar_Juego(tJuego &juego, int &nivel);
 bool hacerMovimiento(tJuego &juego, tTecla tecla);
 void dibujar(const tJuego &juego);

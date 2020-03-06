@@ -22,6 +22,8 @@ typedef struct{
 //PROTOTIPOS
 void cargar_Mina(ifstream &fichero, tMina &mina);
 tCasilla char2tCasilla(char c);
+char tCasilla2char(const tMina &mina);
+void colorFondo(int color);
 void dibujar1_1(const tMina &mina);
 void dibujar1_3(const tMina &mina);
 void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j);
