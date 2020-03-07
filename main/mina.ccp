@@ -6,7 +6,7 @@ using namespace std;
 #include <ObjectArray.h>
 #include "mina.h"
 
-void cargar_Mina(ifstream &fichero, tMina & mina){//He añadido el nombre debido a que es el nombre de nuestro archivo!
+void cargar_Mina(ifstream &fichero, tMina & mina){
     int filas, columnas;
     tCasilla casilla;
     char c;
@@ -26,7 +26,7 @@ void cargar_Mina(ifstream &fichero, tMina & mina){//He añadido el nombre debido
         fichero.get(c);
     }
 }
-tCasilla char2tCasilla(char c){
+tCasilla char2tCasilla(char c){// Conversor de un caracter al tipo tCasilla
     tCasilla cas;
      switch (c){
         case ' ':{
@@ -70,7 +70,7 @@ tCasilla char2tCasilla(char c){
     }
     return cas;
 }
-char tCasilla2char(const tMina &mina, int posX, int posY){
+char tCasilla2char(const tMina &mina, int posX, int posY){// Conversor de tCasilla al caracter que tenemos que sacar por consola
     char c;
     switch(mina.plano[posX][posY]){
         case 0:{
@@ -107,18 +107,32 @@ char tCasilla2char(const tMina &mina, int posX, int posY){
         }break;
     }
 }
-void colorFondo(int color){
+void colorFondo(int color){// Asigna un color al fondo (solo vaido para el entorno Visual)
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(handle, 15 | (color << 4));
 }
 void dibujar1_1(const tMina &mina){
     for(int i=0; i< mina.nFilas; i++){
-        for(int j=0; j< mina.nColumnas; j++){
-            cout << tCasilla2char(mina, i, j);
+        for(int j=0; j< mina.nColumnas; j++){// Recorremos nuestra matriz plano
+            cout << tCasilla2char(mina, i, j); // Sacamos el caracter correspondiente
         }
         cout << endl;
     }
     cout << endl;
 }
-void dibujar1_3(const tMina &mina){}
-void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j){}
+void dibujar1_3(const tMina &mina) {
+    tCasilla casilla;
+    tPlanoCaracteres caracteres;
+    tPlanoColores colores; 
+    for (int i = 0; i < mina.nFilas; i++){
+        for(int j=0; j < mina.nColumnas; j++){// recorremos la matriz plano
+            dibuja3x3(casilla, caracteres, colores, i, j); // dibujamos unas casilla 3x3
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j){
+    
+}

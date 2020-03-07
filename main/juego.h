@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <conio.h>
 using namespace std;
 #include <ObjectArray.h>
 #include "mina.h"
@@ -18,3 +19,4 @@ typedef struct {
 bool cargar_Juego(tJuego &juego, int &nivel);
 bool hacerMovimiento(tJuego &juego, tTecla tecla);
 void dibujar(const tJuego &juego);
+tTecla leerTecla();
