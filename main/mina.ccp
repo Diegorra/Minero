@@ -134,5 +134,34 @@ void dibujar1_3(const tMina &mina) {
 }
 
 void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j){
-    
+    switch (casilla)
+    {
+    case 0:
+        //Nada
+        break;
+    case 1:
+        //Nada
+    break;
+    case 2:
+        //GEMA
+    break;
+    case 3:
+        // Nada
+    break;
+    case 4:
+        //Nada
+    break;
+    case 5:
+        //SALIDA
+    break;
+    case 6:
+        //Nada
+    break;
+    case 7:
+        //MINERO
+    break;
+    }
+
 }
+
+//void nada(tMina mina, int i, int j)
