@@ -4,7 +4,7 @@
 using namespace std;
 #include "juego.h"
 //TIPOS
-typedef enum { ARRIBA, ABAJO, DRCHA, IZDA, SALIR, NADA, TNT }tTeca;
+typedef enum { ARRIBA, ABAJO, DRCHA, IZDA, SALIR, NADA, TNT }tTecla;
 //PROTOTIPOS
 int menu1();
 int menu2();
@@ -77,8 +77,3 @@ int menu3()
 	return opcion;
 }
 
-void colorFondo(int color)
-{
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(handle, 15 | (color << 4));
-}
