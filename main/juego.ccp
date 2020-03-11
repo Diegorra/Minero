@@ -20,10 +20,11 @@ bool cargar_Juego(tJuego &juego, int &nivel){
 
 bool hacerMovimiento(tJuego &juego, tTecla tecla){
     bool hacerlo = true;
+    int i=0;
     switch(tecla){
         case 0 :{// ARRIBA
-            if (puede_hacer_mov()){ //Puede hacer mov
-                juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]]; //MInero desplaza arriba
+            if (puede_hacer_mov(juego, i)){ //Puede hacer mov
+                juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]]; //Minero desplaza arriba
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA; // La excasilla del minero se rellena con tienrra
             }
             else
@@ -33,7 +34,8 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
         }
         break; 
         case 1 :{// ABAJO
-            if (){ //Puede hacer mov
+            i=1;
+            if (puede_hacer_mov(juego, i)){ //Puede hacer mov
                 juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
             }
@@ -43,7 +45,8 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
             }
         }break; 
         case 2 :{ //DRCHA
-            if (){ //Puede hacer mov
+            i=2;
+            if (puede_hacer_mov(juego, i)){ //Puede hacer mov
                 juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[2]][juego.mina.y + incC[2]];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
             }
@@ -52,54 +55,32 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
                 hacerlo = false;
             }
         }break; 
-        case 3 :{
-            if(){ //Puede hacer mov
+        case 3 :{ // IZDA
+            i = 3;
+            if (puede_hacer_mov(juego, i)){ //Puede hacer mov
                 juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[3]][juego.mina.y + incC[3]];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
             }
             else{
                 hacerlo = false;
             }
-        }break; // IZDA
-        case 4 :{
+        }break; 
+        case 4 :{ //SALIR
             hacerlo = false;
-        }break; //SALIR
-        case 5 :{
+        }break; 
+        case 5 :{ //NADA
             hacerlo = false;
-        }break; //NADA
+        }break; 
         case 6 :{}break; //TNT!!!!!!!!!!!!!
     }
 }
+
 void dibujar(const tJuego &juego){}
 
-bool puede_hacer_mov(const tJuego &juego, tTecla tecla){
-     bool puede = true;
-    if (juego.mina.x + incF[0] < 0 || juego.mina.y + incC[0] < 0 || juego.mina.x + incF[0] > juego.mina.nFilas || juego.mina.y + incC[0]> juego.mina.nColumnas)
+bool puede_hacer_mov(const tJuego &juego, int i){
+    bool puede = true;
+    if (juego.mina.x + incF[i] < 0 || juego.mina.y + incC[i] < 0 || juego.mina.x + incF[i] > juego.mina.nFilas || juego.mina.y + incC[i]> juego.mina.nColumnas){
         puede = false;
     }
     return puede;
- }
-tTecla leerTecla(){
-    tTecla t;
-    cin.sync();
-    int dir;
-    dir = _getch();
-    if(dir == 0xe0){
-        dir=_getch();
-        switch(dir){
-            case 72: {t = ARRIBA;}break;
-            case 80:{t= ABAJO;}break;
-            case 77:{t= DRCHA;}break;
-            case 75:{t= IZDA;}break;
-        }
-    }
-    else if(dir == 27){
-        t= SALIR;
-    }
-    else if(dir == 68 || dir == 100){
-        t = TNT;
-    }
-    else{
-        t= NADA;
-    }
 }

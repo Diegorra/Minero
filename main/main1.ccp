@@ -10,7 +10,7 @@ int menu1();
 int menu2();
 int menu3();
 tTecla leerTecla();
-void colorFondo(int color);
+//void colorFondo(int color);
 
 int main()
 {
@@ -77,3 +77,48 @@ int menu3()
 	return opcion;
 }
 
+tTecla leerTecla(){
+	tTecla t;
+	cin.sync();
+	int dir;
+	dir = _getch();
+	if (dir == 0xe0)
+	{
+		dir = _getch();
+		switch (dir)
+		{
+		case 72:
+		{
+			t = ARRIBA;
+		}
+		break;
+		case 80:
+		{
+			t = ABAJO;
+		}
+		break;
+		case 77:
+		{
+			t = DRCHA;
+		}
+		break;
+		case 75:
+		{
+			t = IZDA;
+		}
+		break;
+		}
+	}
+	else if (dir == 27)
+	{
+		t = SALIR;
+	}
+	else if (dir == 68 || dir == 100)
+	{
+		t = TNT;
+	}
+	else
+	{
+		t = NADA;
+	}
+}
