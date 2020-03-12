@@ -106,6 +106,7 @@ char tCasilla2char(const tMina &mina, int posX, int posY){// Conversor de tCasil
             colorFondo(8);
         }break;
     }
+    return c;
 }
 void colorFondo(int color){// Asigna un color al fondo (solo vaido para el entorno Visual)
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
