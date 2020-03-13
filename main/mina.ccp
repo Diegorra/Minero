@@ -19,8 +19,8 @@ void cargar_Mina(ifstream &fichero, tMina & mina){
             casilla = char2tCasilla(c);
             mina.plano[i][j]= casilla;// asignamos al plano lo que corresponda o un muro o una gema...
             if(mina.plano[i][j] == MINERO){ // Si encontramos el tipo minero guardamos sus coordenadas
-                i= mina.x;
-                j= mina.y;
+                mina.x = i;
+                mina.y = j;
             }
         }
         fichero.get(c);
