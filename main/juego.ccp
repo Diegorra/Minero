@@ -5,7 +5,7 @@
 using namespace std;
 #include <ObjectArray.h>
 #include "juego.h"
-const int incF[4]={0, 0, 1, -1};
+const int incF[4]={0, 0, 1, -1}; //arriba, abajo, derecha, izquierda
 const int incC[4]={1, -1, 0, 0};
 
 bool cargar_Juego(tJuego &juego, int &nivel){
@@ -21,10 +21,11 @@ bool cargar_Juego(tJuego &juego, int &nivel){
 bool hacerMovimiento(tJuego &juego, tTecla tecla){
     bool hacerlo = true;
     int i=0;
+    string opcion;
     switch(tecla){
         case 0 :{// ARRIBA
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
-                juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]]; //Minero desplaza arriba
+                juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]] = juego.mina.plano[juego.mina.x][juego.mina.y]; //Minero desplaza arriba
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA; // La excasilla del minero se rellena con tienrra
             }
             else
@@ -36,7 +37,7 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
         case 1 :{// ABAJO
             i=1;
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
-                juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]];
+                juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] = juego.mina.plano[juego.mina.x][juego.mina.y];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
             }
             else
@@ -47,7 +48,7 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
         case 2 :{ //DRCHA
             i=2;
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
-                juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[2]][juego.mina.y + incC[2]];
+                juego.mina.plano[juego.mina.x + incF[2]][juego.mina.y + incC[2]] = juego.mina.plano[juego.mina.x][juego.mina.y];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
             }
             else
@@ -58,7 +59,7 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
         case 3 :{ // IZDA
             i = 3;
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
-                juego.mina.plano[juego.mina.x][juego.mina.y] = juego.mina.plano[juego.mina.x + incF[3]][juego.mina.y + incC[3]];
+                juego.mina.plano[juego.mina.x + incF[3]][juego.mina.y + incC[3]] = juego.mina.plano[juego.mina.x][juego.mina.y];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
             }
             else{
@@ -66,7 +67,14 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
             }
         }break; 
         case 4 :{ //SALIR
-            hacerlo = false;
+            cout << "Seguro que quieres salir?(SI/NO)";
+            cin << opcion;
+            if(opcion == "SI"){
+                system("clear");
+            }
+            else{
+                hacerlo = false;
+            }
         }break; 
         case 5 :{ //NADA
             hacerlo = false;
