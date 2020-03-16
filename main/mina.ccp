@@ -6,7 +6,7 @@ using namespace std;
 #include <ObjectArray.h>
 #include "mina.h"
 
-void cargar_Mina(ifstream &fichero, tMina & mina){
+void cargar_Mina(ifstream &fichero, tMina & mina){// Función que carga la mina desde un archivo de entrada
     int filas, columnas;
     tCasilla casilla;
     char c;
