@@ -7,9 +7,8 @@ using namespace std;
 #include "mina.h"
 
 //TIPOS
-typedef enum
-{ARRIBA, ABAJO, DRCHA, IZDA, SALIR, NADA, TNT } tTecla;
-
+typedef enum {ARRIBA, ABAJO, DRCHA, IZDA, SALIR, NADA, TNT } tTecla;
+typedef enum {JUGANDO, ABANDONA, FIN}tEstado;
 typedef struct {
 	tMina mina;
 	int gem = 0, numMov = 0, numTNT=0;
