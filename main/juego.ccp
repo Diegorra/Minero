@@ -33,9 +33,11 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
     estado = JUGANDO;
     switch(tecla){
         case 0 :{// ARRIBA
-            if (puede_hacer_mov(juego, i)){ //Puede hacer mov
+            if (puede_hacer_mov(juego, i) && juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]]!= PIEDRA){                                                                                                                    //Puede hacer mov
                 juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]] = juego.mina.plano[juego.mina.x][juego.mina.y]; //Minero desplaza arriba
-                juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA; // La excasilla del minero se rellena con tienrra
+                juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA; // La excasilla del minero se rellena con tierra
+                juego.mina.x =+ incF[i]; //Actualizamos posicion del minero
+                juego.mina.y=+ incC[i];
                 juego.numMov++;
             }
             else
@@ -46,9 +48,11 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
         break; 
         case 1 :{// ABAJO
             i=1;
-            if (puede_hacer_mov(juego, i)){ //Puede hacer mov
+            if (puede_hacer_mov(juego, i) && juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] != PIEDRA){ //Puede hacer mov
                 juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] = juego.mina.plano[juego.mina.x][juego.mina.y];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
+                juego.mina.x = +incF[i]; //Actualizamos posicion del minero
+                juego.mina.y = +incC[i];
                 juego.numMov++;
             }
             else
@@ -61,6 +65,8 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
                 juego.mina.plano[juego.mina.x + incF[2]][juego.mina.y + incC[2]] = juego.mina.plano[juego.mina.x][juego.mina.y];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
+                juego.mina.x = +incF[i]; //Actualizamos posicion del minero
+                juego.mina.y = +incC[i];
                 juego.numMov++;
             }
             else
@@ -73,6 +79,8 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
                 juego.mina.plano[juego.mina.x + incF[3]][juego.mina.y + incC[3]] = juego.mina.plano[juego.mina.x][juego.mina.y];
                 juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA;
+                juego.mina.x = +incF[i]; //Actualizamos posicion del minero
+                juego.mina.y = +incC[i];
                 juego.numMov++;
             }
             else{
@@ -125,6 +133,5 @@ bool puede_hacer_mov(const tJuego &juego, int i){
     if (juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]] == MURO){
         puede = false;
     }
-    //OJO si PIEDRA arriba o abajo no puede hacer mov;
     return puede;
 }
