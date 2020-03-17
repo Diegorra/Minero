@@ -46,7 +46,13 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){//Ve si puede hacer mov, si es
             i=1;
             if (puede_hacer_mov(juego, i) && juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] != PIEDRA){ //Puede hacer mov y la casilla no es piedra
                 estado = casilla_deplaza(juego, i); //Valoramos casos especiales que haya una gema, salida
-                mover(juego, i);
+                if(juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]] == PIEDRA){ // Si tiene una piedra encima cuando baje toda la columna cae con el
+                    mover(juego, i);
+                    caidaCascada(juego,juego.mina.x, juego.mina.y+2);
+                }
+                else{
+                    mover(juego, i);
+                }
             }
             else
             {
@@ -121,7 +127,7 @@ bool puede_hacer_mov(tJuego &juego, int i){ // puede hacer mov si no...
 
 void mover(tJuego &juego, int i){// mueve minero
     juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]] = juego.mina.plano[juego.mina.x][juego.mina.y]; //Minero desplaza posicion
-    juego.mina.plano[juego.mina.x][juego.mina.y] = TIERRA; // La excasilla del minero se rellena con tierra
+    juego.mina.plano[juego.mina.x][juego.mina.y] = LIBRE; // La excasilla del minero queda libre
     juego.mina.x = +incF[i]; //Actualizamos posicion del minero
     juego.mina.y = +incC[i];
 }
@@ -136,7 +142,7 @@ tEstado casilla_deplaza(tJuego &juego, int i){// valoramos casos especiales sobr
     }
     if (juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]] == PIEDRA && movilidad_piedra){ // Hay una piedra movible
         juego.mina.plano[juego.mina.x + 2 * incF[i]][juego.mina.y + 2 * incC[i]] = PIEDRA;
-        gravedad(juego);
+        caidaCascada(juego, juego.mina.x + 2 * incF[i], juego.mina.y + 2 * incC[i]);
     }
     return estado;
 }
@@ -149,9 +155,20 @@ bool movilidad_piedra(tJuego &juego, int i){//Vemos si la piedra puede ser despl
     return movilidad;
 }
 
-void consecuencias_mov(tJuego &juego, int i){// Consecuencias del movimiento que ha hecho
-    //Habia una piedra encima > cae cascada
+void caidaCascada(tJuego &juego,int iniX, int iniY){
+    int x, y; // Sirve para actualizar la caida de una casilla
+    while (juego.mina.plano[iniX][iniY] != MURO ){ //Mientras no tengamos un muro 
+        x = iniX;
+        y = iniY;
+        while (juego.mina.plano[x + incF[1]][y + incC[1]] == LIBRE){ //y la casilla siguiente este libre
+            juego.mina.plano[x + incF[1]][y + incC[1]] = juego.mina.plano[x][y]; //elemento baja una posicion
+            juego.mina.plano[x][y] = LIBRE;// la casilla donde estaba el elemento queda libre
+            x = +incF[1]; // actualizamos posicion
+            y = +incC[1];
+        }
+        iniY++; // Pasamos al siguiente elemento de la columna
+    }
+    
 }
-void gravedad(tJuego &juego){ // caida de un objeto hasta encontrar un obstaculo
 
-}
+//FALTA ver si al moverse el minero cae una columna debido a q habia piedras encima!!
