@@ -19,3 +19,4 @@ bool cargar_Juego(tJuego &juego, int &nivel);
 bool hacerMovimiento(tJuego &juego, tTecla tecla);
 void dibujar(const tJuego &juego);
 bool puede_hacer_mov(const tJuego &juego, int i);
+void mover(tJuego &juego, int i);

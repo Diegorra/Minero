@@ -112,7 +112,7 @@ void colorFondo(int color){// Asigna un color al fondo (solo vaido para el entor
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(handle, 15 | (color << 4));
 }
-void dibujar1_1(const tMina &mina){
+void dibujar1_1(const tMina &mina){// Dibuja la mina escala 1:1
     for(int i=0; i< mina.nFilas; i++){
         for(int j=0; j< mina.nColumnas; j++){// Recorremos nuestra matriz plano
             cout << tCasilla2char(mina, i, j); // Sacamos el caracter correspondiente
@@ -121,7 +121,7 @@ void dibujar1_1(const tMina &mina){
     }
     cout << endl;
 }
-void dibujar1_3(const tMina &mina) {
+void dibujar1_3(const tMina &mina) {// Dibuja la mina escala 1:3
     tCasilla casilla;
     tPlanoCaracteres caracteres;
     tPlanoColores colores; 
