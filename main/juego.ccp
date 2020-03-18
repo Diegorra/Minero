@@ -105,11 +105,11 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){//Ve si puede hacer mov, si es
     return hacerlo;
 }
 
-void dibujar(const tJuego &juego, int opcion){// dibujamos el juego
-    if(opcion == 1){
+void dibujar(const tJuego &juego, int i){// dibujamos el juego
+    if(i == 1){
         dibujar1_1(juego.mina);
     }
-    else{
+    else if(i = 2){
         dibujar1_3(juego.mina);
     }
     cout << "Gemas totales recogidas:" << juego.gem << endl;

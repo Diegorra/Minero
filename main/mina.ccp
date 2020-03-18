@@ -75,35 +75,35 @@ char tCasilla2char(const tMina &mina, int posX, int posY){// Conversor de tCasil
     switch(mina.plano[posX][posY]){
         case 0:{
            c = ' '; 
-           //colorFondo(6); 
+           colorFondo(6); 
         }break;
         case 1:{
             c = '.';
-            //colorFondo(6);
+            colorFondo(6);
         }break;
         case 2:{
             c = 'G';
-            //colorFondo(10);
+            colorFondo(10);
         }break;
         case 3:{
             c = '@';
-            //colorFondo(6);
+            colorFondo(6);
         }break;
         case 4:{
             c = 'X';
-            //colorFondo(6);
+            colorFondo(6);
         }break;
         case 5:{
             c = 'S';
-            //colorFondo(2);
+            colorFondo(2);
         }break;
         case 6:{
             c = 'D';
-            //colorFondo(1);
+            colorFondo(1);
         }break;
         case 7:{
             c = 'M';
-            //colorFondo(8);
+            colorFondo(8);
         }break;
     }
     return c;
@@ -116,6 +116,7 @@ void dibujar1_1(const tMina &mina){// Dibuja la mina escala 1:1
     for(int i=0; i< mina.nFilas; i++){
         for(int j=0; j< mina.nColumnas; j++){// Recorremos nuestra matriz plano
             cout << tCasilla2char(mina, i, j); // Sacamos el caracter correspondiente
+            colorFondo(0);
         }
         cout << endl;
     }

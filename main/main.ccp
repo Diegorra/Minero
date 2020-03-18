@@ -10,31 +10,66 @@ int menu1();
 int menu2();
 int menu3();
 tTecla leerTecla();
-//void colorFondo(int color);
 
-int main()
-{
-	int opcion1;
+
+int main(){
+	int opcion1, opcion2, opcion3;
+	tEstado estado;
+	tJuego juego;
+	tTecla tecla;
+	int nivel = 1;
 	opcion1 = menu1();
-	switch(opcion1){
-		case 1:
-		{
-			///
+	while(estado = ){
+		switch(opcion1){
+			cargar_Juego(juego, nivel);
+			case 1:{
+				opcion2 = menu2();
+				switch(opcion2){
+					case 1:{
+						tecla = leerTecla();
+						dibujar(juego, 1);
+						while(estado == JUGANDO){
+							hacerMovimiento(juego, tecla);
+							dibujar(juego, 1);
+						}
+					}break;
+					case 2:{
+						//Extraer tecla de fichero
+					}break;
+					case 3:{
+						estado = ABANDONA;
+					}
+				}	
+			}break;
+			case 2:{
+				opcion2 = menu2();
+				switch (opcion2)
+				{
+				case 1:{
+					tecla = leerTecla();
+					dibujar(juego, 2);
+					while(estado == JUGANDO){
+						hacerMovimiento(juego, tecla);
+						dibujar(juego, 2);
+					}
+				}break;
+				case 2:{
+					// extraer tecla por fichero
+				}
+				break;
+				case 3:
+				{
+					estado = ABANDONA;
+				}
+			}break;
+			case 0:{
+				estado = ABANDONA;
+			}break;
 		}
-		break;
-		case 2:
-		{
-			///
-		}break;
-		case 0:
-		{
-			system("EXIT");
-		}break;
 	}
 }
 
-int menu1()
-{
+int menu1(){
 	int opcion;
 	cout << "1. Jugar a escala 1:1" << endl;
 	cout << "2. Jugar a escala 1:3" << endl;
@@ -48,8 +83,7 @@ int menu1()
 	return opcion;
 }
 
-int menu2()
-{
+int menu2(){
 	int opcion;
 	cout << "1. Introducir movimientos por teclado" << endl;
 	cout << "2. Introducir movimientos por fichero" << endl;
@@ -63,8 +97,7 @@ int menu2()
 	return opcion;
 }
 
-int menu3()
-{
+int menu3(){
 	int opcion;
 	cout << "1. Jugar siguiente nivel" << endl;
 	cout << "0. Salir" << endl;
