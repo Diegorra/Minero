@@ -27,12 +27,13 @@ bool cargar_Juego(tJuego &juego, int &nivel){
 
 bool hacerMovimiento(tJuego &juego, tTecla tecla){//Ve si puede hacer mov, si es asi mueve
     bool hacerlo = true;
-    int i=0;
+    int i;
     tEstado estado;
     estado = JUGANDO;
+    i = 0;
     switch(tecla){
         case 0 :{// ARRIBA
-            if (puede_hacer_mov(juego, i) && juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]]!= PIEDRA){// Puede hacer mov y la casilla no es piedra                                                                                                                    //Puede hacer mov
+            if (puede_hacer_mov(juego, i) && juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]]!= PIEDRA){// Puede hacer mov y la casilla no es piedra                                                                                                                    //Puede hacer mov
                 estado = casilla_deplaza(juego, i); //Valoramos casos especiales que haya una gema, salida
                 mover(juego, i);
             }
@@ -44,7 +45,7 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){//Ve si puede hacer mov, si es
         break; 
         case 1 :{// ABAJO
             i=1;
-            if (puede_hacer_mov(juego, i) && juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] != PIEDRA){ //Puede hacer mov y la casilla no es piedra
+            if (puede_hacer_mov(juego, i) && juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]] != PIEDRA){ //Puede hacer mov y la casilla no es piedra
                 estado = casilla_deplaza(juego, i); //Valoramos casos especiales que haya una gema, salida
                 if(juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]] == PIEDRA){ // Si tiene una piedra encima cuando baje toda la columna cae con el
                     mover(juego, i);
@@ -63,7 +64,7 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){//Ve si puede hacer mov, si es
             i=2;
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
                 estado = casilla_deplaza(juego, i); //Valoramos casos especiales que haya una gema, salida o una piedra que pueda ser empujada
-                mover(juego, i);
+                desplazamiento_horizontal(juego, i); // posibilidad minero debajo de una piedra > desplaza y piedra cae
             }
             else
             {
@@ -74,7 +75,7 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){//Ve si puede hacer mov, si es
             i = 3;
             if (puede_hacer_mov(juego, i)){ //Puede hacer mov
                 estado = casilla_deplaza(juego, i);//Valoramos casos especiales que haya una gema, salida o una piedra que pueda ser empujada
-                mover(juego, i);
+                desplazamiento_horizontal(juego, i);
             }
             else{
                 hacerlo = false;
@@ -86,8 +87,17 @@ bool hacerMovimiento(tJuego &juego, tTecla tecla){//Ve si puede hacer mov, si es
         case 5 :{ //NADA
             hacerlo = false;
         }break; 
-        case 6 :{ //TNT!!!!!!!!!!!!!
-            //...
+        case 6 :{ //TNT
+            if(juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] == LIBRE){ // Para poder colocar el TNT
+                //El TNT cae desde la posicion del minero en vertical
+                juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] = DINAMITA;
+                caidaCascada(juego, juego.mina.x + incF[1], juego.mina.y + incC[1]); // TNT cae hasta que encuentra obstaculo
+                explosionTNT(juego, estado); // explota
+                juego.numTNT++;
+            }
+            else{
+                estado = OVER; // Explota en manos de minero
+            }
         }
         break;
     }
@@ -155,9 +165,9 @@ bool movilidad_piedra(tJuego &juego, int i){//Vemos si la piedra puede ser despl
     return movilidad;
 }
 
-void caidaCascada(tJuego &juego,int iniX, int iniY){
+void caidaCascada(tJuego &juego,int iniX, int iniY){ // derrumbamiento en la mina
     int x, y; // Sirve para actualizar la caida de una casilla
-    while (juego.mina.plano[iniX][iniY] != MURO ){ //Mientras no tengamos un muro 
+    while (juego.mina.plano[iniX][iniY] != MURO && juego.mina.plano[iniX][iniY] != MINERO ){ //Mientras no tengamos un muro o el minero 
         x = iniX;
         y = iniY;
         while (juego.mina.plano[x + incF[1]][y + incC[1]] == LIBRE){ //y la casilla siguiente este libre
@@ -171,4 +181,31 @@ void caidaCascada(tJuego &juego,int iniX, int iniY){
     
 }
 
-//FALTA ver si al moverse el minero cae una columna debido a q habia piedras encima!!
+void desplazamiento_horizontal(tJuego &juego, int i){ // Tenemos la posibilidad de que el minero este soportando una piedra y al desplazarse esta caiga
+    if(juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]] == PIEDRA){
+        mover(juego,i);
+        caidaCascada(juego,juego.mina.x- incF[i]+ incF[0], juego.mina.y - incC[i] + incC[0]);
+    }
+    else{
+        mover(juego, i);
+    }
+}
+
+void explosionTNT(tJuego juego, tEstado estado){ //Explosion TNT
+    estado = JUGANDO;
+    int coordX, coordY, j=1; // coordenadas TNT
+    coordX =juego.mina.x + incF[1];
+    coordY = juego.mina.y + incC[1];
+    while(juego.mina.plano[juego.mina.x + j*incF[1]][juego.mina.y+ j*incC[1]] != DINAMITA){// Sacamos coordenadas del TNT
+        coordX =+ incF[1]; // Actualizamos coordenadas
+        coordY =+ incC[1];
+        j++; // Contador
+    }
+    for(int i=0; i <= 7; i++){
+        if (juego.mina.plano[coordX + incF[i]][coordY + incC[i]] == MINERO){ // Si alguna de las casilla donde alcanza la dinamita es el minero game over
+            estado = OVER;
+        }
+        juego.mina.plano[coordX + incF[i]][coordY + incC[i]] = LIBRE;
+    }
+    
+}
