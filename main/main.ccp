@@ -3,8 +3,7 @@
 #include <fstream>
 using namespace std;
 #include "juego.h"
-//TIPOS
-typedef enum { ARRIBA, ABAJO, DRCHA, IZDA, SALIR, NADA, TNT }tTecla;
+
 //PROTOTIPOS
 int menu1();
 int menu2();
@@ -17,9 +16,10 @@ int main(){
 	tEstado estado;
 	tJuego juego;
 	tTecla tecla;
+	ifstream ficheroMOV;
 	int nivel = 1;
 	opcion1 = menu1();
-	while(estado = ){
+	while(estado = JUGANDO){
 		switch(opcion1){
 			cargar_Juego(juego, nivel);
 			case 1:{
@@ -35,10 +35,19 @@ int main(){
 					}break;
 					case 2:{
 						//Extraer tecla de fichero
+						ficheroMOV.open("movimientos.txt");
+						if(ficheroMOV.is_open){
+							ficheroMOV >> tecla;
+							dibujar(juego, 1);
+							while(estado == JUGANDO){
+								hacerMovimiento(juego, tecla);
+								dibujar(juego, 1);
+							}
+						}else{
+							cout <<"ERROR" << endl;
+						}
 					}break;
-					case 3:{
-						estado = ABANDONA;
-					}
+					case 3:{estado = ABANDONA;}
 				}	
 			}break;
 			case 2:{
@@ -62,10 +71,22 @@ int main(){
 					estado = ABANDONA;
 				}
 			}break;
-			case 0:{
-				estado = ABANDONA;
-			}break;
+			case 0:{estado = ABANDONA;}break;
 		}
+		if(estado=FIN){
+			opcion3 = menu3();
+			switch (opcion3){
+			case 1:{estado = JUGANDO;}break;
+			case 0:{estado = ABANDONA;}break;
+			}
+		}
+		
+	}
+	if(estado = ABANDONA){
+		system("exit");
+	}
+	if (estado = OVER){
+		cout << "Moriste enterrado :(" << endl;
 	}
 }
 
@@ -75,8 +96,7 @@ int menu1(){
 	cout << "2. Jugar a escala 1:3" << endl;
 	cout << "3. Salir" << endl;
 	cin >> opcion;
-	while (opcion < 0 && opcion > 3)
-	{
+	while (opcion < 0 && opcion > 3){
 		cout << "ERROR debe introducir un numero entre 0 y 3" << endl;
 		cin >> opcion;
 	}
@@ -115,35 +135,16 @@ tTecla leerTecla(){
 	cin.sync();
 	int dir;
 	dir = _getch();
-	if (dir == 0xe0)
-	{
+	if (dir == 0xe0){
 		dir = _getch();
-		switch (dir)
-		{
-		case 72:
-		{
-			t = ARRIBA;
-		}
-		break;
-		case 80:
-		{
-			t = ABAJO;
-		}
-		break;
-		case 77:
-		{
-			t = DRCHA;
-		}
-		break;
-		case 75:
-		{
-			t = IZDA;
-		}
-		break;
+		switch (dir){
+			case 72:{t = ARRIBA;}break;
+			case 80:{t = ABAJO;}break;
+			case 77:{t = DRCHA;}break;
+			case 75:{t = IZDA;}break;
 		}
 	}
-	else if (dir == 27)
-	{
+	else if (dir == 27){
 		t = SALIR;
 	}
 	else if (dir == 68 || dir == 100)
