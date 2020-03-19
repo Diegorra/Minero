@@ -5,8 +5,8 @@
 using namespace std;
 #include <ObjectArray.h>
 #include "juego.h"
-const int incF[4]={0, 0, 1, -1}; //arriba, abajo, derecha, izquierda
-const int incC[4]={1, -1, 0, 0};
+const int incF[8] = {0, 0, 1, -1, 1, -1, -1, 1}; //arriba, abajo, derecha, izquierda, diagonales
+const int incC[8] = {1, -1, 0, 0, 1, 1, -1, -1};
 
 bool cargar_Juego(tJuego &juego, int &nivel){
     string aux;
