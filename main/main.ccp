@@ -167,6 +167,7 @@ tTecla leerTecla(){
 	{
 		t = NADA;
 	}
+	return t;
 }
 
 tTecla extraerFichero(char c){
