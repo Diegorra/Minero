@@ -15,12 +15,13 @@ bool cargar_Juego(tJuego &juego, int &nivel){
     aux = to_string(nivel); // Convertir entero a string
     aux+=".txt";
     ifstream fichero(aux); 
-    if(fichero.is_open){
+    if(fichero.is_open()){
         cargar_Mina(fichero, mina);
     }else{
         cout <<"ERROR" << endl;
         carga = false;
     }
+    fichero.close();
     nivel++;
     return carga;
 }

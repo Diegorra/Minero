@@ -37,7 +37,7 @@ int main(){
 					case 2:{
 						//Extraer tecla de fichero
 						ficheroMOV.open("movimientos.txt");
-						if(ficheroMOV.is_open){
+						if(ficheroMOV.is_open()){
 							dibujar(juego, 1);
 							while (estado == JUGANDO  && tecla != NADA){// Mientras pueda jugar y no llegue al final del fichero
 								ficheroMOV.get(c);
@@ -66,7 +66,7 @@ int main(){
 					case 2:{
 						//Extraer tecla de fichero
 							ficheroMOV.open("movimientos.txt");
-							if(ficheroMOV.is_open){
+							if(ficheroMOV.is_open()){
 								dibujar(juego, 2);
 								while (estado == JUGANDO  && tecla != NADA){ // Mientras pueda jugar y no llegue al final del fichero
 									ficheroMOV.get(c);
