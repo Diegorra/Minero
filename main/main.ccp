@@ -54,38 +54,36 @@ int main(){
 			}break;
 			case 2:{
 				opcion2 = menu2();
-				switch (opcion2)
-				{
-				case 1:{
-					tecla = leerTecla();
-					dibujar(juego, 2);
-					while(estado == JUGANDO){
-						hacerMovimiento(juego, tecla);
+				switch (opcion2){
+					case 1:{
+						tecla = leerTecla();
 						dibujar(juego, 2);
-					}
-				}break;
-				case 2:{
-					//Extraer tecla de fichero
-						ficheroMOV.open("movimientos.txt");
-						if(ficheroMOV.is_open){
+						while(estado == JUGANDO){
+							hacerMovimiento(juego, tecla);
 							dibujar(juego, 2);
-							while (estado == JUGANDO  && tecla != NADA){ // Mientras pueda jugar y no llegue al final del fichero
-								ficheroMOV.get(c);
-								tecla = extraerFichero(c);
-								hacerMovimiento(juego, tecla);
+						}
+					}break;
+					case 2:{
+						//Extraer tecla de fichero
+							ficheroMOV.open("movimientos.txt");
+							if(ficheroMOV.is_open){
 								dibujar(juego, 2);
-							}
-						}else{
-							cout <<"ERROR" << endl;
-						ficheroMOV.close();
-				}
-				break;
-				case 3:
-				{
-					estado = ABANDONA;
+								while (estado == JUGANDO  && tecla != NADA){ // Mientras pueda jugar y no llegue al final del fichero
+									ficheroMOV.get(c);
+									tecla = extraerFichero(c);
+									hacerMovimiento(juego, tecla);
+									dibujar(juego, 2);
+								}
+							}else{
+								cout <<"ERROR" << endl;
+							ficheroMOV.close();
+					}break;
+					case 3:{estado = ABANDONA;
+					}break;
 				}
 			}break;
-			case 0:{estado = ABANDONA;}break;
+			case 0:{estado = ABANDONA;
+			}break;
 		}
 		if(estado=FIN){
 			opcion3 = menu3();
@@ -94,7 +92,6 @@ int main(){
 			case 0:{estado = ABANDONA;}break;
 			}
 		}
-		
 	}
 	if(estado = ABANDONA){
 		system("exit");
@@ -103,6 +100,7 @@ int main(){
 		cout << "Moriste enterrado :(" << endl;
 	}
 }
+
 
 int menu1(){
 	int opcion;
