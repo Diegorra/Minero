@@ -9,7 +9,7 @@ int menu1();
 int menu2();
 int menu3();
 tTecla leerTecla();
-
+tTecla extraerFichero(char c);
 
 int main(){
 	int opcion1, opcion2, opcion3;
@@ -17,6 +17,7 @@ int main(){
 	tJuego juego;
 	tTecla tecla;
 	ifstream ficheroMOV;
+	char c;
 	int nivel = 1;
 	opcion1 = menu1();
 	while(estado = JUGANDO){
@@ -37,15 +38,16 @@ int main(){
 						//Extraer tecla de fichero
 						ficheroMOV.open("movimientos.txt");
 						if(ficheroMOV.is_open){
-							ficheroMOV >> tecla;
 							dibujar(juego, 1);
-							while(estado == JUGANDO){
+							while (estado == JUGANDO  && tecla != NADA){// Mientras pueda jugar y no llegue al final del fichero
+								ficheroMOV.get(c);
+								tecla = extraerFichero(c);
 								hacerMovimiento(juego, tecla);
 								dibujar(juego, 1);
 							}
 						}else{
 							cout <<"ERROR" << endl;
-						}
+						ficheroMOV.close();
 					}break;
 					case 3:{estado = ABANDONA;}
 				}	
@@ -63,7 +65,19 @@ int main(){
 					}
 				}break;
 				case 2:{
-					// extraer tecla por fichero
+					//Extraer tecla de fichero
+						ficheroMOV.open("movimientos.txt");
+						if(ficheroMOV.is_open){
+							dibujar(juego, 2);
+							while (estado == JUGANDO  && tecla != NADA){ // Mientras pueda jugar y no llegue al final del fichero
+								ficheroMOV.get(c);
+								tecla = extraerFichero(c);
+								hacerMovimiento(juego, tecla);
+								dibujar(juego, 2);
+							}
+						}else{
+							cout <<"ERROR" << endl;
+						ficheroMOV.close();
 				}
 				break;
 				case 3:
@@ -155,4 +169,16 @@ tTecla leerTecla(){
 	{
 		t = NADA;
 	}
+}
+
+tTecla extraerFichero(char c){
+	tTecla t;
+	switch(c){
+		case 'A':{t= ARRIBA;}break;
+		case 'z':{t=ABAJO;}break;
+		case 'N':{t=DRCHA;}break;
+		case 'M':{t=IZDA;}break;
+		case ' ':{t=NADA;}break; //Si acaba el fichero
+	}
+	return t;
 }
