@@ -24,9 +24,9 @@ int main()
 	estado = JUGANDO;
 	while (estado == JUGANDO)
 	{
+		cargar_Juego(juego, nivel);
 		switch (opcion1)
 		{
-			cargar_Juego(juego, nivel);
 		case 1:
 		{
 			opcion2 = menu2();
