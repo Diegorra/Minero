@@ -21,6 +21,7 @@ int main()
 	char c;
 	int nivel = 1;
 	opcion1 = menu1();
+	estado = JUGANDO;
 	while (estado == JUGANDO)
 	{
 		switch (opcion1)

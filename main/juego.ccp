@@ -171,10 +171,10 @@ bool puede_hacer_mov(tJuego &juego, int i)
 }
 
 void mover(tJuego &juego, int i)
-{                                                                                                                    // mueve minero
+{// mueve minero
     juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]] = juego.mina.plano[juego.mina.x][juego.mina.y]; //Minero desplaza posicion
-    juego.mina.plano[juego.mina.x][juego.mina.y] = LIBRE;                                                            // La excasilla del minero queda libre
-    juego.mina.x = +incF[i];                                                                                         //Actualizamos posicion del minero
+    juego.mina.plano[juego.mina.x][juego.mina.y] = LIBRE;// La excasilla del minero queda libre
+    juego.mina.x = +incF[i];//Actualizamos posicion del minero
     juego.mina.y = +incC[i];
 }
 
@@ -208,7 +208,7 @@ bool movilidad_piedra(tJuego &juego, int i)
 }
 
 void caidaCascada(tJuego &juego, int iniX, int iniY)
-{             // derrumbamiento en la mina
+{// derrumbamiento en la mina
     int x, y; // Sirve para actualizar la caida de una casilla
     while (juego.mina.plano[iniX][iniY] != MURO && juego.mina.plano[iniX][iniY] != MINERO)
     { //Mientras no tengamos un muro o el minero
