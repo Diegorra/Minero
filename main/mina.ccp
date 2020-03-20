@@ -75,11 +75,11 @@ char tCasilla2char(const tMina &mina, int posX, int posY){// Conversor de tCasil
     switch(mina.plano[posX][posY]){
         case 0:{
            c = ' '; 
-           colorFondo(6); 
+           colorFondo(4); 
         }break;
         case 1:{
             c = '.';
-            colorFondo(6);
+            colorFondo(4);
         }break;
         case 2:{
             c = 'G';
@@ -87,11 +87,11 @@ char tCasilla2char(const tMina &mina, int posX, int posY){// Conversor de tCasil
         }break;
         case 3:{
             c = '@';
-            colorFondo(6);
+            colorFondo(4);
         }break;
         case 4:{
             c = 'X';
-            colorFondo(6);
+            colorFondo(4);
         }break;
         case 5:{
             c = 'S';
@@ -103,7 +103,7 @@ char tCasilla2char(const tMina &mina, int posX, int posY){// Conversor de tCasil
         }break;
         case 7:{
             c = 'M';
-            colorFondo(8);
+            colorFondo(13);
         }break;
     }
     return c;
