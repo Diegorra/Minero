@@ -21,7 +21,7 @@ int main()
 	char c;
 	int nivel = 1;
 	opcion1 = menu1();
-	while (estado = JUGANDO)
+	while (estado == JUGANDO)
 	{
 		switch (opcion1)
 		{
@@ -141,11 +141,11 @@ int main()
 			break;
 			}
 		}
-		if (estado = ABANDONA)
+		if (estado == ABANDONA)
 		{
 			system("exit");
 		}
-		if (estado = OVER)
+		if (estado == OVER)
 		{
 			cout << "Moriste enterrado :(" << endl;
 		}
