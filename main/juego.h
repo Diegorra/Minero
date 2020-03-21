@@ -16,7 +16,7 @@ typedef struct {
 
 //PROTOTIPOS
 bool cargar_Juego(tJuego &juego, int &nivel);
-bool hacerMovimiento(tJuego &juego, tTecla tecla);
+testado hacerMovimiento(tJuego &juego, tTecla tecla);
 void dibujar(const tJuego &juego, int i);
 bool puede_hacer_mov(tJuego &juego, int i);
 void mover(tJuego &juego, int i);

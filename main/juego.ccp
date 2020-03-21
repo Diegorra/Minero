@@ -5,8 +5,8 @@
 using namespace std;
 #include <ObjectArray.h>
 #include "juego.h"
-const int incF[8] = {0, 0, 1, -1, 1, -1, -1, 1}; //arriba, abajo, derecha, izquierda, diagonales
-const int incC[8] = {1, -1, 0, 0, 1, 1, -1, -1};
+const int incF[8] = {-1, 1, 0, 0, 1, -1, -1, 1}; //arriba, abajo, derecha, izquierda, diagonales
+const int incC[8] = {0, 0, 1, -1, 1, 1, -1, -1};
 
 bool cargar_Juego(tJuego &juego, int &nivel)
 {
@@ -18,7 +18,7 @@ bool cargar_Juego(tJuego &juego, int &nivel)
     ifstream fichero(aux);
     if (fichero.is_open())
     {
-        cargar_Mina(fichero, mina);
+        cargar_Mina(fichero, juego.mina);
     }
     else
     {
@@ -30,7 +30,7 @@ bool cargar_Juego(tJuego &juego, int &nivel)
     return carga;
 }
 
-bool hacerMovimiento(tJuego &juego, tTecla tecla)
+tEstado hacerMovimiento(tJuego &juego, tTecla tecla)
 { //Ve si puede hacer mov, si es asi mueve
     bool hacerlo = true;
     int i;
@@ -163,7 +163,7 @@ bool puede_hacer_mov(tJuego &juego, int i)
         puede = false;
     }
     // una piedra inamovible
-    if (!movilidad_piedra(juego, i))
+    if (juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]] == PIEDRA && !movilidad_piedra(juego, i))
     {
         puede = false;
     }

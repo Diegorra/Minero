@@ -1,4 +1,4 @@
-// Práctica del minero FP2 versión 1
+//Práctica del minero FP2 versión 1
 #include <iostream>;
 #include <fstream>
 using namespace std;
@@ -21,6 +21,7 @@ int main()
 	char c;
 	int nivel = 1;
 	opcion1 = menu1();
+	system("CLS");
 	estado = JUGANDO;
 	while (estado == JUGANDO)
 	{
@@ -30,61 +31,21 @@ int main()
 		case 1:
 		{
 			opcion2 = menu2();
-			switch (opcion2)
-			{
-				case 1:
-				{
-					tecla = leerTecla();
-					dibujar(juego, 1);
-					while (estado == JUGANDO)
-					{
-						hacerMovimiento(juego, tecla);
-						dibujar(juego, 1);
-					}
-				}
-				break;
-				case 2:
-				{
-					//Extraer tecla de fichero
-					ficheroMOV.open("movimientos.txt");
-					if (ficheroMOV.is_open())
-					{
-						dibujar(juego, 1);
-						while (estado == JUGANDO && tecla != NADA)
-						{ // Mientras pueda jugar y no llegue al final del fichero
-							ficheroMOV.get(c);
-							tecla = extraerFichero(c);
-							hacerMovimiento(juego, tecla);
-							dibujar(juego, 1);
-						}
-					}
-					else
-					{
-						cout << "ERROR" << endl;
-						ficheroMOV.close();
-					}
-				}
-				break;
-				case 3:
-				{
-					estado = ABANDONA;
-				}break;
-			}
-		}
-		break;
-		case 2:
-		{
-			opcion2 = menu2();
+			system("CLS");
 			switch (opcion2)
 			{
 			case 1:
 			{
+				dibujar(juego, 1);
 				tecla = leerTecla();
-				dibujar(juego, 2);
+				estado = hacerMovimiento(juego, tecla);
+				system("CLS");
 				while (estado == JUGANDO)
 				{
-					hacerMovimiento(juego, tecla);
-					dibujar(juego, 2);
+					dibujar(juego, 1);
+					tecla = leerTecla();
+					estado = hacerMovimiento(juego, tecla);
+					system("CLS");
 				}
 			}
 			break;
@@ -94,13 +55,18 @@ int main()
 				ficheroMOV.open("movimientos.txt");
 				if (ficheroMOV.is_open())
 				{
-					dibujar(juego, 2);
+					dibujar(juego, 1);
+					ficheroMOV.get(c);
+					tecla = extraerFichero(c);
+					estado = hacerMovimiento(juego, tecla);
+					system("CLS");
 					while (estado == JUGANDO && tecla != NADA)
 					{ // Mientras pueda jugar y no llegue al final del fichero
+						dibujar(juego, 1);
 						ficheroMOV.get(c);
 						tecla = extraerFichero(c);
-						hacerMovimiento(juego, tecla);
-						dibujar(juego, 2);
+						estado = hacerMovimiento(juego, tecla);
+						system("CLS");
 					}
 				}
 				else
@@ -116,7 +82,61 @@ int main()
 			}
 			break;
 			}
-			
+		}
+		break;
+		case 2:
+		{
+			opcion2 = menu2();
+			switch (opcion2)
+			{
+			case 1:
+			{
+				dibujar(juego, 2);
+				tecla = leerTecla();
+				estado = hacerMovimiento(juego, tecla);
+				system("CLS");
+				while (estado == JUGANDO)
+				{
+					dibujar(juego, 2);
+					tecla = leerTecla();
+					estado = hacerMovimiento(juego, tecla);
+					system("CLS");
+				}
+			}
+			break;
+			case 2:
+			{
+				//Extraer tecla de fichero
+				ficheroMOV.open("movimientos.txt");
+				if (ficheroMOV.is_open())
+				{
+					dibujar(juego, 2);
+					ficheroMOV.get(c);
+					tecla = extraerFichero(c);
+					estado = hacerMovimiento(juego, tecla);
+					system("CLS");
+					while (estado == JUGANDO && tecla != NADA)
+					{ // Mientras pueda jugar y no llegue al final del fichero
+						dibujar(juego, 2);
+						ficheroMOV.get(c);
+						tecla = extraerFichero(c);
+						estado = hacerMovimiento(juego, tecla);
+						system("CLS");
+					}
+				}
+				else
+				{
+					cout << "ERROR" << endl;
+					ficheroMOV.close();
+				}
+			}
+			break;
+			case 3:
+			{
+				estado = ABANDONA;
+			}
+			break;
+			}
 		}
 		break;
 		case 0:
@@ -125,9 +145,11 @@ int main()
 		}
 		break;
 		}
-		if (estado = FIN)
+		system("CLS");
+		if (estado == FIN)
 		{
 			opcion3 = menu3();
+			system("CLS");
 			switch (opcion3)
 			{
 			case 1:
@@ -150,6 +172,7 @@ int main()
 		{
 			cout << "Moriste enterrado :(" << endl;
 		}
+		system("CLS");
 	}
 }
 
@@ -160,7 +183,7 @@ int menu1()
 	cout << "2. Jugar a escala 1:3" << endl;
 	cout << "3. Salir" << endl;
 	cin >> opcion;
-	while (opcion < 0 && opcion > 3)
+	while (opcion < 0 || opcion > 3)
 	{
 		cout << "ERROR debe introducir un numero entre 0 y 3" << endl;
 		cin >> opcion;
@@ -175,7 +198,7 @@ int menu2()
 	cout << "2. Introducir movimientos por fichero" << endl;
 	cout << "3. Salir" << endl;
 	cin >> opcion;
-	while (opcion < 0 && opcion > 3)
+	while (opcion < 0 || opcion > 3)
 	{
 		cout << "ERROR debe introducir un numero entre 0 y 3" << endl;
 		cin >> opcion;
@@ -189,7 +212,7 @@ int menu3()
 	cout << "1. Jugar siguiente nivel" << endl;
 	cout << "0. Salir" << endl;
 	cin >> opcion;
-	while (opcion < 0 && opcion > 1)
+	while (opcion < 0 || opcion > 1)
 	{
 		cout << "ERROR debe introducir un numero entre 0 y 3" << endl;
 		cin >> opcion;
