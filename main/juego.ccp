@@ -61,7 +61,7 @@ tEstado hacerMovimiento(tJuego &juego, tTecla tecla)
             if (juego.mina.plano[juego.mina.x + incF[0]][juego.mina.y + incC[0]] == PIEDRA)
             { // Si tiene una piedra encima cuando baje toda la columna cae con el
                 mover(juego, i);
-                caidaCascada(juego, juego.mina.x, juego.mina.y + 2);
+                caidaCascada(juego, juego.mina.x - 2, juego.mina.y);
             }
             else
             {
