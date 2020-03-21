@@ -20,12 +20,12 @@ int main()
 	ifstream ficheroMOV;
 	char c;
 	int nivel = 1;
-	opcion1 = menu1();
-	system("CLS");
 	estado = JUGANDO;
 	while (estado == JUGANDO)
 	{
 		cargar_Juego(juego, nivel);
+		opcion1 = menu1();
+		system("CLS");
 		switch (opcion1)
 		{
 		case 1:
