@@ -174,8 +174,8 @@ void mover(tJuego &juego, int i)
 {// mueve minero
     juego.mina.plano[juego.mina.x + incF[i]][juego.mina.y + incC[i]] = juego.mina.plano[juego.mina.x][juego.mina.y]; //Minero desplaza posicion
     juego.mina.plano[juego.mina.x][juego.mina.y] = LIBRE;// La excasilla del minero queda libre
-    juego.mina.x = +incF[i];//Actualizamos posicion del minero
-    juego.mina.y = +incC[i];
+    juego.mina.x += incF[i];//Actualizamos posicion del minero
+    juego.mina.y += incC[i];
 }
 
 tEstado casilla_deplaza(tJuego &juego, int i)
@@ -218,8 +218,8 @@ void caidaCascada(tJuego &juego, int iniX, int iniY)
         {                                                                        //y la casilla siguiente este libre
             juego.mina.plano[x + incF[1]][y + incC[1]] = juego.mina.plano[x][y]; //elemento baja una posicion
             juego.mina.plano[x][y] = LIBRE;                                      // la casilla donde estaba el elemento queda libre
-            x = +incF[1];                                                        // actualizamos posicion
-            y = +incC[1];
+            x += incF[1];                                                        // actualizamos posicion
+            y += incC[1];
         }
         iniY++; // Pasamos al siguiente elemento de la columna
     }
