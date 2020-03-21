@@ -238,16 +238,17 @@ void desplazamiento_horizontal(tJuego &juego, int i)
     }
 }
 
-void explosionTNT(tJuego juego, tEstado estado)
+tEstado explosionTNT(tJuego juego)
 { //Explosion TNT
+    tEstado estado;
     estado = JUGANDO;
     int coordX, coordY, j = 1; // coordenadas TNT
     coordX = juego.mina.x + incF[1];
     coordY = juego.mina.y + incC[1];
     while (juego.mina.plano[juego.mina.x + j * incF[1]][juego.mina.y + j * incC[1]] != DINAMITA)
     {                      // Sacamos coordenadas del TNT
-        coordX = +incF[1]; // Actualizamos coordenadas
-        coordY = +incC[1];
+        coordX += incF[1]; // Actualizamos coordenadas
+        coordY += incC[1];
         j++; // Contador
     }
     for (int i = 0; i <= 7; i++)
@@ -258,4 +259,6 @@ void explosionTNT(tJuego juego, tEstado estado)
         }
         juego.mina.plano[coordX + incF[i]][coordY + incC[i]] = LIBRE;
     }
+    juego.mina.plano[coordX][coordY] = LIBRE;
+    return estado;
 }

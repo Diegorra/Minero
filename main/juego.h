@@ -16,7 +16,7 @@ typedef struct {
 
 //PROTOTIPOS
 bool cargar_Juego(tJuego &juego, int &nivel);
-testado hacerMovimiento(tJuego &juego, tTecla tecla);
+tEstado hacerMovimiento(tJuego &juego, tTecla tecla);
 void dibujar(const tJuego &juego, int i);
 bool puede_hacer_mov(tJuego &juego, int i);
 void mover(tJuego &juego, int i);
@@ -24,4 +24,4 @@ tEstado casilla_deplaza(tJuego &juego, int i);
 bool movilidad_piedra(tJuego &juego, int i);
 void caidaCascada(tJuego &juego, int iniX, int iniY);
 void desplazamiento_horizontal(tJuego &juego, int i);
-void explosionTNT(tJuego juego, tEstado estado);
+tEstado explosionTNT(tJuego juego);
