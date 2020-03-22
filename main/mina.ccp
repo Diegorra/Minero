@@ -192,6 +192,7 @@ void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colo
                 colorFondo(color);
             }
         }
+        colorFondo(0);
     case 7:
         //MINERO
         c = 'M';
