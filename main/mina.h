@@ -29,3 +29,4 @@ void colorFondo(int color);
 void dibujar1_1(const tMina &mina);
 void dibujar1_3(const tMina &mina);
 void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j);
+void nada(tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j, char c, int color);
