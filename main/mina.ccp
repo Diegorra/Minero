@@ -125,10 +125,22 @@ void dibujar1_1(const tMina &mina){// Dibuja la mina escala 1:1
 void dibujar1_3(const tMina &mina) {// Dibuja la mina escala 1:3
     tCasilla casilla;
     tPlanoCaracteres caracteres;
-    tPlanoColores colores; 
+    tPlanoColores colores;
+    int auxY=0, auxX=0; 
     for (int i = 0; i < mina.nFilas; i++){
-        for(int j=0; j < mina.nColumnas; j++){// recorremos la matriz plano
-           dibuja3x3(casilla, caracteres, colores, i, j); // dibujamos unas casilla 3x3
+        auxY=0;
+        for(int j=0; j < mina.nColumnas; j++){// recorremos la matriz plano e inicializar caracteres y colores
+            casilla= mina.plano[i][j];
+            dibuja3x3(casilla, caracteres, colores, i+auxX, j+auxY);
+            auxY+= 2;
+        }
+        auxX+=2;
+    }
+    for(int i=0; i <3*mina.nFilas; i++){//Sacamos por pantalla el plano en verison 1:3
+        for(int j=0; j <3*mina.nColumnas; j++){
+            cout << caracteres[i][j];
+            colorFondo(colores[i][j]);
+            colorFondo(0);
         }
         cout << endl;
     }
@@ -185,14 +197,6 @@ void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colo
         caracteres[i+x][j+y] = 'N';
         y++;
         caracteres[i+x][j+y] = 'T';
-        for(int x=0; x<3; x++){
-            for(int y=0; y<3; y++){
-                cout << caracteres[i+x][j+y];
-                color = colores[i+x][j+y];
-                colorFondo(color);
-            }
-        }
-        colorFondo(0);
     case 7:
         //MINERO
         c = 'M';
@@ -203,15 +207,12 @@ void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colo
 }
 
 void nada(tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j, char c, int color){
-    for (int x = 0; x < 3; x++)
-    {
-        for (int y = 0; y < 3; y++) //Creamos submatrices 3x3 de cada elemento del fichero
+        for (int x = 0; x < 3; x++)
         {
-            caracteres[i + x][j + y] = c; //Guardamos el valor en la matriz de caracteres
-            colores[i + x][j + y] = color; //Guardamos el valor en la matriz de caracteres
-            cout << caracteres[i + x][j + y];
-            colorFondo(color);
+            for (int y = 0; y < 3; y++) //Creamos submatrices 3x3 de cada elemento del fichero
+            {
+                caracteres[i + x][j + y] = c; //Guardamos el valor en la matriz de caracteres
+                colores[i + x][j + y] = color; //Guardamos el valor en la matriz de caracteres
+            }
         }
-    }
-    colorFondo(0);
 }
