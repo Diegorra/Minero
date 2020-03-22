@@ -138,12 +138,12 @@ void dibujar1_3(const tMina &mina) {// Dibuja la mina escala 1:3
     }
     for(int i=0; i <3*mina.nFilas; i++){//Sacamos por pantalla el plano en verison 1:3
         for(int j=0; j <3*mina.nColumnas; j++){
-            cout << caracteres[i][j];
             colorFondo(colores[i][j]);
-            colorFondo(0);
+            cout << caracteres[i][j];
         }
         cout << endl;
     }
+    colorFondo(0);
     cout << endl;
 }
 
