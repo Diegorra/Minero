@@ -24,4 +24,4 @@ tEstado casilla_deplaza(tJuego &juego, int i);
 bool movilidad_piedra(tJuego &juego, int i);
 void caidaCascada(tJuego &juego, int iniX, int iniY);
 void desplazamiento_horizontal(tJuego &juego, int i);
-tEstado explosionTNT(tJuego juego);
+tEstado explosionTNT(tJuego &juego);

@@ -238,7 +238,7 @@ void desplazamiento_horizontal(tJuego &juego, int i)
     }
 }
 
-tEstado explosionTNT(tJuego juego)
+tEstado explosionTNT(tJuego &juego)
 { //Explosion TNT
     tEstado estado;
     estado = JUGANDO;
