@@ -119,7 +119,7 @@ tEstado hacerMovimiento(tJuego &juego, tTecla tecla)
             //El TNT cae desde la posicion del minero en vertical
             juego.mina.plano[juego.mina.x + incF[1]][juego.mina.y + incC[1]] = DINAMITA;
             caidaCascada(juego, juego.mina.x + incF[1], juego.mina.y + incC[1]); // TNT cae hasta que encuentra obstaculo
-            explosionTNT(juego, estado);                                         // explota
+            estado = explosionTNT(juego);// explota
             juego.numTNT++;
         }
         else
@@ -130,7 +130,7 @@ tEstado hacerMovimiento(tJuego &juego, tTecla tecla)
     break;
     }
     juego.numMov++;
-    return hacerlo;
+    return estado;
 }
 
 void dibujar(const tJuego &juego, int i)
