@@ -19,6 +19,7 @@ int main()
 	tTecla tecla;
 	ifstream ficheroMOV;
 	char c;
+	string nombre;
 	int nivel = 1;
 	estado = JUGANDO;
 	while (estado == JUGANDO)
@@ -52,7 +53,10 @@ int main()
 			case 2:
 			{
 				//Extraer tecla de fichero
-				ficheroMOV.open("movimientos.txt");
+				cout<< "Introduzca el nombre del fichero: ";
+				cin >> nombre;
+				nombre += ".txt";
+				ficheroMOV.open(nombre);
 				if (ficheroMOV.is_open())
 				{
 					dibujar(juego, 1);
@@ -107,7 +111,10 @@ int main()
 			case 2:
 			{
 				//Extraer tecla de fichero
-				ficheroMOV.open("movimientos.txt");
+				cout << "Introduzca el nombre del fichero: ";
+				cin >> nombre;
+				nombre += ".txt";
+				ficheroMOV.open(nombre);
 				if (ficheroMOV.is_open())
 				{
 					dibujar(juego, 2);
