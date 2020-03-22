@@ -128,7 +128,7 @@ void dibujar1_3(const tMina &mina) {// Dibuja la mina escala 1:3
     tPlanoColores colores; 
     for (int i = 0; i < mina.nFilas; i++){
         for(int j=0; j < mina.nColumnas; j++){// recorremos la matriz plano
-            dibuja3x3(casilla, caracteres, colores, i, j); // dibujamos unas casilla 3x3
+           dibuja3x3(casilla, caracteres, colores, i, j); // dibujamos unas casilla 3x3
         }
         cout << endl;
     }
@@ -136,34 +136,81 @@ void dibujar1_3(const tMina &mina) {// Dibuja la mina escala 1:3
 }
 
 void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j){
+    char c;
+    tMina mina;
+    int color;
     switch (casilla)
     {
     case 0:
-        //Nada
+        c= ' ';
+        nada(caracteres, colores, i, j, c, 4);
         break;
     case 1:
-        //Nada
-    break;
+        c = '.';
+        nada(caracteres, colores, i, j, c, 4);
+        break;
     case 2:
         //GEMA
-    break;
+        c = 'G';
+        nada(caracteres, colores, i, j, c, 10);
+        break;
     case 3:
-        // Nada
-    break;
+        c = '@';
+        nada(caracteres, colores, i, j, c, 4);
+        break;
     case 4:
-        //Nada
-    break;
+        c = 'X';
+        nada(caracteres, colores, i, j, c, 4);
+        break;
     case 5:
         //SALIDA
-    break;
+        c = 'S';
+        nada(caracteres, colores, i, j, c, 2);
+        break;
     case 6:
-        //Nada
-    break;
+        //DINAMITA
+        for(int x=0; x < 3; x++){
+            for(int y=0; y < 3; y++){
+                if(x== 2){
+                    colores[i+x][j+y]= 12;
+                }
+                else{
+                    caracteres[i+x][j+y]=' ';
+                    colores[i+x][j+y] = 15;
+                }
+            }
+        }
+        int x=1, y=1;
+        caracteres[i + x][j] = 'T';
+        caracteres[i+x][j+y] = 'N';
+        y++;
+        caracteres[i+x][j+y] = 'T';
+        for(int x=0; x<3; x++){
+            for(int y=0; y<3; y++){
+                cout << caracteres[i+x][j+y];
+                color = colores[i+x][j+y];
+                colorFondo(color);
+            }
+        }
     case 7:
         //MINERO
+        c = 'M';
+        nada(caracteres, colores, i, j, c, 13);
     break;
     }
 
 }
 
-//void nada(tMina mina, int i, int j)
+void nada(tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j, char c, int color){
+    for (int x = 0; x < 3; x++)
+    {
+        for (int y = 0; y < 3; y++) //Creamos submatrices 3x3 de cada elemento del fichero
+        {
+            caracteres[i + x][j + y] = c; //Guardamos el valor en la matriz de caracteres
+            colores[i + x][j + y] = color; //Guardamos el valor en la matriz de caracteres
+            cout << caracteres[i + x][j + y];
+            colorFondo(color);
+        }
+    }
+    colorFondo(0);
+}
