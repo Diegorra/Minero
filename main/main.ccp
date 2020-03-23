@@ -72,6 +72,12 @@ int main()
 						estado = hacerMovimiento(juego, tecla);
 						system("CLS");
 					}
+					if (estado == JUGANDO)
+					{
+						cout << "No has completado el nivel" << endl;
+						estado == ABANDONA;
+						system("pause");
+					}
 				}
 				else
 				{
@@ -129,6 +135,12 @@ int main()
 						tecla = extraerFichero(c);
 						estado = hacerMovimiento(juego, tecla);
 						system("CLS");
+					}
+					if (estado == JUGANDO)
+					{
+						cout << "No has completado el nivel" << endl;
+						estado == ABANDONA;
+						system("pause");
 					}
 				}
 				else
@@ -285,19 +297,19 @@ tTecla extraerFichero(char c)
 		t = ARRIBA;
 	}
 	break;
-	case 'z':
+	case 'Z':
 	{
 		t = ABAJO;
 	}
 	break;
 	case 'N':
 	{
-		t = DRCHA;
+		t = IZDA;
 	}
 	break;
 	case 'M':
 	{
-		t = IZDA;
+		t = DRCHA;
 	}
 	break;
 	case ' ':

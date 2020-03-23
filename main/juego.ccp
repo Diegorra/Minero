@@ -210,7 +210,7 @@ bool movilidad_piedra(tJuego &juego, int i)
 void caidaCascada(tJuego &juego, int iniX, int iniY)
 {// derrumbamiento en la mina
     int x, y; // Sirve para actualizar la caida de una casilla
-    while (juego.mina.plano[iniX][iniY] != MURO && juego.mina.plano[iniX][iniY] != MINERO)
+    while (iniX >= 0 && iniY >= 0 && iniX <= juego.mina.nFilas && iniY <= juego.mina.nColumnas && juego.mina.plano[iniX][iniY] != MURO && juego.mina.plano[iniX][iniY] != MINERO)
     { //Mientras no tengamos un muro o el minero
         x = iniX;
         y = iniY;
@@ -221,7 +221,7 @@ void caidaCascada(tJuego &juego, int iniX, int iniY)
             x += incF[1];                                                        // actualizamos posicion
             y += incC[1];
         }
-        iniY++; // Pasamos al siguiente elemento de la columna
+        iniX--; // Pasamos al siguiente elemento de la columna
     }
 }
 
@@ -246,7 +246,7 @@ tEstado explosionTNT(tJuego &juego)
     coordX = juego.mina.x + incF[1];
     coordY = juego.mina.y + incC[1];
     while (juego.mina.plano[juego.mina.x + j * incF[1]][juego.mina.y + j * incC[1]] != DINAMITA)
-    {                      // Sacamos coordenadas del TNT
+    {                       // Sacamos coordenadas del TNT
         coordX += incF[1]; // Actualizamos coordenadas
         coordY += incC[1];
         j++; // Contador
