@@ -150,7 +150,7 @@ void dibujar1_3(const tMina &mina) {// Dibuja la mina escala 1:3
 void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colores, int i, int j){
     char c;
     tMina mina;
-    int color;
+    int color, a, z;
     switch (casilla)
     {
     case 0:
@@ -183,7 +183,7 @@ void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colo
         //DINAMITA
         for(int x=0; x < 3; x++){
             for(int y=0; y < 3; y++){
-                if(x== 2){
+                if(x== 1){
                     colores[i+x][j+y]= 12;
                 }
                 else{
@@ -192,11 +192,13 @@ void dibuja3x3(tCasilla casilla, tPlanoCaracteres caracteres, tPlanoColores colo
                 }
             }
         }
-        int x=1, y=1;
-        caracteres[i + x][j] = 'T';
-        caracteres[i+x][j+y] = 'N';
-        y++;
-        caracteres[i+x][j+y] = 'T';
+        a = 1,
+        z = 1;
+        caracteres[i + a][j] = 'T';
+        caracteres[i + a][j + z] = 'N';
+        z++;
+        caracteres[i + a][j + z] = 'T';
+        colorFondo(0);
     case 7:
         //MINERO
         c = 'M';
