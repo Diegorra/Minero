@@ -141,6 +141,7 @@ void dibujar1_3(const tMina &mina) {// Dibuja la mina escala 1:3
             colorFondo(colores[i][j]);
             cout << caracteres[i][j];
         }
+        colorFondo(0);
         cout << endl;
     }
     colorFondo(0);
