@@ -8,10 +8,12 @@
 using namespace std;
 #include <ObjectArray.h>
 
+//TIPOS
 const int TOTAL_MINAS = 5;
+const int DIM=2;
 typedef struct{
     int Idmina, numMov, numGem, numTNT, puntos;
-}tDatosMina; //informacion de una mina 
+} tDatosMina; //informacion de una mina
 
 typedef struct{
     string nombre;
@@ -20,10 +22,11 @@ typedef struct{
 }tPuntuacionesJug; //informacion de un jugador
 
 typedef struct{
-    int capacidad, num_jugs;
-    tPuntuacionesJug *array_clasification;//array dinamico
+    int capacidad=2, num_jugs;
+    tPuntuacionesJug *array_clasification[2];//array dinamico
 }tPuntuaciones; //informacion de todos los jugadores
 
+//PROTOTIPOS
 bool cargar_Marcador(tPuntuaciones& marcador);
 bool guardar_Marcador(tPuntuaciones& marcador);
 void mostar_Minas_usuario(const tPuntuaciones& marcador, int cont);
@@ -35,3 +38,4 @@ void aumentar_capacidad(tPuntuaciones& marcador);
 void destruir(tPuntuaciones& marcador);
 bool buscar(tPuntuaciones& marcador, const string& nombre, int& pos);
 void insertar(tPuntuaciones& marcador, string const& nombre, int pos);
+void ampliarDIM(tPuntuaciones& marcador);
