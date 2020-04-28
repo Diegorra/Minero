@@ -28,9 +28,13 @@ bool cargar_Marcador(tPuntuaciones &marcador){// funcion que carga de un archivo
         }
         marcador.num_jugs = i; //en cada iteracion actualizamos nuestro num_jugs
         i++;
-        if(i>=DIM){ // si excedemos el numero de jugadores que soporta nuestro array_clasification debemos ampliarlo
+        if(i >= DIM){ // si excedemos el numero de jugadores que soporta nuestro array_clasification debemos ampliarlo
             ampliarDIM(marcador);
+           // DIM *= 2;
         }
     }
     
+}
+bool guardar_Marcador(tPuntuaciones &marcador){// cargamos en un fichero el marcador
+
 }

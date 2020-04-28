@@ -23,7 +23,7 @@ typedef struct{
 
 typedef struct{
     int capacidad=2, num_jugs;
-    tPuntuacionesJug *array_clasification[2];//array dinamico
+    tPuntuacionesJug *array_clasification[DIM];//array dinamico
 }tPuntuaciones; //informacion de todos los jugadores
 
 //PROTOTIPOS
