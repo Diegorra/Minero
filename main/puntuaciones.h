@@ -17,7 +17,7 @@ typedef struct{
 
 typedef struct{
     string nombre;
-    int pun_total, numMinas;
+    int punt_total, numMinas;
     tDatosMina vMinasRecorridas[TOTAL_MINAS];
 }tPuntuacionesJug; //informacion de un jugador
 
