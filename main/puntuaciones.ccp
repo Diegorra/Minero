@@ -9,6 +9,8 @@ using namespace std;
 #include <ObjectArray.h>
 #include "puntuaciones.h"
 
+//OJO considerar ordenar en aquella funciones que asi lo precisen
+
 bool cargar_Marcador(tPuntuaciones &marcador){// funcion que carga de un archivo los perfiles de los jugadores
     int i=0;
     tPuntuaciones puntuaciones;
@@ -43,10 +45,9 @@ bool cargar_Marcador(tPuntuaciones &marcador){// funcion que carga de un archivo
     {
         cargar = false; //si no se pudo abrir el archivo retornamos false
     }
-    return cargar;
-   
-    
+    return cargar;  
 }
+
 bool guardar_Marcador(tPuntuaciones &marcador){// cargamos en un fichero el marcador
     ofstream fichero;
     bool guardar=true;
@@ -75,4 +76,16 @@ void mostar_Minas_usuario(const tPuntuaciones &marcador, int cont){//sacamos por
     }
 }
 
+void mostrar_Alfabetico(const tPuntuaciones &marcador){//sacamos la puntuacion de los usuarios ordenados alfabeticamente
+    cout << "------------------- LISTA DE JUGADORES -------------------" << endl;
+    for(int i=0; i<= marcador.num_jugs; i++){
+        cout << "                    " << marcador.array_clasification[i]->punt_total << endl;
+    }
+}
 
+void mostar_Datos_Usuario(const tPuntuaciones &marcador){
+    cout << "------------------- JUGADORES ORDENADOS POR NOMBRE -------------------" << endl;
+    for (int i=0; i < marcador.num_jugs; i++){
+        mostar_Minas_usuario(marcador, i);
+    }
+}
