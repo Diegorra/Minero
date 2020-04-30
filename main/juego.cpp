@@ -1,5 +1,5 @@
-//Práctica del minero FP2 versión 1
-//Realizada por Diego Ramón Sanchis grupo A; FP2-A56 dieramon@ucm.es
+//Prï¿½ctica del minero FP2 versiï¿½n 1
+//Realizada por Diego Ramï¿½n Sanchis grupo A; FP2-A56 dieramon@ucm.es
 //				Diego Alvarez Carretero grupo A; FP2-A04
 #include <iostream>
 #include <fstream>
@@ -25,7 +25,6 @@ bool cargar_Juego(tJuego& juego, int& nivel) {
         carga = false;
     }
     fichero.close();
-    nivel++;
     return carga;
 }
 

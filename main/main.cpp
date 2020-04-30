@@ -1,23 +1,35 @@
-//Práctica del minero FP2 versión 1
-//Realizada por Diego Ramón Sanchis grupo A; FP2-A56 dieramon@ucm.es
+//Prï¿½ctica del minero FP2 versiï¿½n 1
+//Realizada por Diego Ramï¿½n Sanchis grupo A; FP2-A56 dieramon@ucm.es
 //				Diego Alvarez Carretero grupo A; FP2-A04
 #include <iostream>;
 #include <fstream>
 using namespace std;
 #include "juego.h"
+#include "puntuaciones.h"
 //TIPOS
-const int nivelM = 5;
+const int TOTAL_MINAS = 5;
+const int A = 10;
+const int B = 5;
 //PROTOTIPOS
 int menu1();
 int menu2();
 int menu3();
 
+
 int main(){
-	int opcion1=0, opcion2=0, opcion3=0;
+	int opcion1=0, opcion2=0, opcion3=0, pos=0, puntuacion=0;
+	string nombreJug;
 	tEstado estado = JUGANDO;
 	tJuego juego;
-	int nivel = 1;
+	tPuntuaciones marcador;
+	int nivel = 0;
+	cout << "Introduzca su nombre de usuario";
+	cin >> nombreJug;
 	while (estado == JUGANDO) {
+		nivel = menuMarcador(marcador, nombreJug, pos);
+		if (nivel == 0){ //si el usuario decide salir
+			estado = ABANDONA;
+		}
 		cargar_Juego(juego, nivel);
 		opcion1 = menu1();
 		system("CLS");
@@ -50,20 +62,15 @@ int main(){
 		case 3: {estado = ABANDONA;}break;
 		}
 		system("CLS");
-		if (estado == FIN){
-			if (nivel == nivelM) {
-				estado = ABANDONA;
-				cout << "Fin del juego" << endl;
-				system("pause");
-			}
-			else {
-				opcion3 = menu3();
-				system("CLS");
-				switch (opcion3) {
-				case 1: {estado = JUGANDO; }break;
-				case 0: {estado = ABANDONA; }break;
-				}
-			}
+		puntuacion =(juego.mina.nColumnas * juego.mina.nFilas) + (A * juego.gem) - juego.numMov - (B * juego.numTNT); //calculamos la puntuacion optenida
+		anadirDatos(marcador, nivel, juego.numMov, juego.gem, juego.numTNT, puntuacion, pos); //actualizamos info usuario
+		guardar_Marcador(marcador); //guardamos en un fichero 
+		if (estado == FIN){			
+			opcion3 = menu3();
+			system("CLS");
+			switch (opcion3) {
+			case 1: {estado = JUGANDO;}break;
+			case 0: {estado = ABANDONA; }break;
 		}
 		if (estado == ABANDONA){
 			system("exit");
@@ -115,5 +122,6 @@ int menu3() {
 	}
 	return opcion;
 }
+
 
 

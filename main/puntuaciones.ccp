@@ -142,3 +142,33 @@ void insertar(tPuntuaciones &marcador, string const &nombre, int pos){// realiza
     marcador.array_clasification[pos].nombre = nombre; //insertamos
     marcador.num_jugs++; //actualizamos contador
 }
+
+int menuMarcador(tPuntuaciones &marcador,string nombreJug, int &pos){ //desarrollo de marcador
+    int num=0;
+    if (buscar(marcador, nombreJug, pos)){
+        mostar_Minas_usuario(marcador, pos);
+    }
+    else{
+        cout << "Eres nuevo/a" << nombreJug << endl;
+        cout << "Mira las puntuaciones de otros jugadores!" <<endl;
+        mostrar_Alfabetico(marcador);
+        insertar(marcador, nombreJug, pos);
+    }
+    system("pause");
+    cout << nombreJug << ", ¿Que mina quier explorar?" <<endl;
+    cout << "Introduce un numero entre 1 y 5 para explorar la mina o 0 para salir";
+    cin >> num;
+    while (num > 5 || num < 0){
+        cout << "ERROR, el numero introducido no es valido" << endl;
+        cin >> num;
+    }
+}
+
+void anadirDatos(tPuntuaciones &marcador, int Idmina, int numMov, int numGem, int numTNT, int puntos, int pos){
+    marcador.array_clasification[pos].vMinasRecorridas[Idmina].numMov = numMov;
+    marcador.array_clasification[pos].vMinasRecorridas[Idmina].numGem = numGem;
+    marcador.array_clasification[pos].vMinasRecorridas[Idmina].numTNT = numTNT;
+    marcador.array_clasification[pos].vMinasRecorridas[Idmina].puntos = puntos;
+    marcador.array_clasification[pos].numMinas++;
+    marcador.array_clasification[pos].punt_total += marcador.array_clasification[pos].vMinasRecorridas[Idmina].puntos = puntos;
+}

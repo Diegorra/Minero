@@ -12,17 +12,17 @@ using namespace std;
 const int TOTAL_MINAS = 5;
 const int DIM=2;
 typedef struct{
-    int Idmina, numMov, numGem, numTNT, puntos;
+    int Idmina = 0, numMov = 0, numGem = 0, numTNT = 0, puntos = 0;
 } tDatosMina; //informacion de una mina
 
 typedef struct{
     string nombre;
-    int punt_total, numMinas;
+    int punt_total=0, numMinas=0;
     tDatosMina vMinasRecorridas[TOTAL_MINAS];
 }tPuntuacionesJug; //informacion de un jugador
 
 typedef struct{
-    int capacidad=2, num_jugs;
+    int capacidad=2, num_jugs=0;
     tPuntuacionesJug *array_clasification;//array dinamico
 }tPuntuaciones; //informacion de todos los jugadores
 
@@ -38,3 +38,5 @@ void aumentar_capacidad(tPuntuaciones& marcador);
 void destruir(tPuntuaciones& marcador);
 bool buscar(tPuntuaciones& marcador, const string& nombre, int& pos);
 void insertar(tPuntuaciones& marcador, string const& nombre, int pos);
+int menuMarcador(tPuntuaciones& marcador, string nombreJug, int& pos);
+void anadirDatos(tPuntuaciones &marcador, int Idmina, int numMov, int numGem, int numTNT, int puntos, int pos);
