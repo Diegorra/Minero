@@ -83,6 +83,7 @@ int main(){
 			switch (opcion3) {
 			case 1: {estado = JUGANDO;}break;
 			case 0: {estado = ABANDONA; }break;
+			}
 		}
 		if (estado == ABANDONA){
 			system("exit");
