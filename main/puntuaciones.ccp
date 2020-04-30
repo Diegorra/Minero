@@ -109,3 +109,36 @@ void aumentar_capacidad(tPuntuaciones &marcador){//funcion que duplica la capaci
 void destruir(tPuntuaciones &marcador){//liberar la memoria
     delete [] marcador.array_clasification;
 }
+
+bool buscar(tPuntuaciones &marcador, const string &nombre, int &pos){//debido a que contamos con una lista ordenada busqueda binaria
+    bool encontrado = false;
+    int ini=0, fin=marcador.num_jugs, mitad; //para preservar los valores
+    while(!encontrado && (ini < fin)){
+        mitad = (ini + fin)/2; //de esta forma vamos acotando el rango de valores
+        if(nombre == marcador.array_clasification[mitad].nombre){
+            encontrado = true;
+            pos = mitad;
+        }else if(nombre < marcador.array_clasification[mitad].nombre){
+            fin = mitad-1; 
+        }else{
+            ini = mitad + 1;
+        }
+    }
+    return encontrado;
+}
+
+void insertar(tPuntuaciones &marcador, string const &nombre, int pos){// realizaremos la insercion de un usuario preservando el orden
+    int i=0;
+    if(marcador.num_jugs = marcador.capacidad){ //si tenemos un array completo ampliamos
+        aumentar_capacidad(marcador);
+    }
+    while((i< marcador.num_jugs) && (marcador.array_clasification[i].nombre < nombre)){ //actualizamos i hasta ver la posicion en que insetar
+        i++;
+    }
+    pos = i;
+    for(int i = pos; i < marcador.capacidad; i++){//corremos desde la posicion todos los elementos una casilla
+        marcador.array_clasification[i] = marcador.array_clasification[i+1];
+    }
+    marcador.array_clasification[pos].nombre = nombre; //insertamos
+    marcador.num_jugs++; //actualizamos contador
+}
