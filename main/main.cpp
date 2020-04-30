@@ -25,8 +25,17 @@ int main(){
 	int nivel = 0;
 	cout << "Introduzca su nombre de usuario";
 	cin >> nombreJug;
+	if (buscar(marcador, nombreJug, pos)){ //si el usuario ya esta registrado mostramos su informacion
+		mostar_Minas_usuario(marcador, pos);
+	}
+	else{ //sino mostramos el marcador global y registramos el usuario
+		cout << "Eres nuevo/a" << nombreJug << endl;
+		cout << "Mira las puntuaciones de otros jugadores!" << endl;
+		mostrar_Alfabetico(marcador);
+		insertar(marcador, nombreJug, pos);
+	}
 	while (estado == JUGANDO) {
-		nivel = menuMarcador(marcador, nombreJug, pos);
+		nivel = menuMarcador(nombreJug);
 		if (nivel == 0){ //si el usuario decide salir
 			estado = ABANDONA;
 		}
@@ -62,9 +71,12 @@ int main(){
 		case 3: {estado = ABANDONA;}break;
 		}
 		system("CLS");
-		puntuacion =(juego.mina.nColumnas * juego.mina.nFilas) + (A * juego.gem) - juego.numMov - (B * juego.numTNT); //calculamos la puntuacion optenida
-		anadirDatos(marcador, nivel, juego.numMov, juego.gem, juego.numTNT, puntuacion, pos); //actualizamos info usuario
-		guardar_Marcador(marcador); //guardamos en un fichero 
+		if(estado != OVER && estado != ABANDONA){ //si recorre la mina con exito
+			puntuacion = (juego.mina.nColumnas * juego.mina.nFilas) + (A * juego.gem) - juego.numMov - (B * juego.numTNT); //calculamos la puntuacion optenida
+			anadirDatos(marcador, nivel, juego.numMov, juego.gem, juego.numTNT, puntuacion, pos);//actualizamos info usuario
+			guardar_Marcador(marcador);	//guardamos en un fichero
+			mostar_Datos_Usuario(marcador); //mostramos los datos actualizados
+		}
 		if (estado == FIN){			
 			opcion3 = menu3();
 			system("CLS");

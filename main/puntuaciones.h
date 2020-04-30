@@ -38,5 +38,5 @@ void aumentar_capacidad(tPuntuaciones& marcador);
 void destruir(tPuntuaciones& marcador);
 bool buscar(tPuntuaciones& marcador, const string& nombre, int& pos);
 void insertar(tPuntuaciones& marcador, string const& nombre, int pos);
-int menuMarcador(tPuntuaciones& marcador, string nombreJug, int& pos);
+int menuMarcador(string nombreJug);
 void anadirDatos(tPuntuaciones &marcador, int Idmina, int numMov, int numGem, int numTNT, int puntos, int pos);

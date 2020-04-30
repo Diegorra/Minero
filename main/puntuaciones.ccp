@@ -143,17 +143,8 @@ void insertar(tPuntuaciones &marcador, string const &nombre, int pos){// realiza
     marcador.num_jugs++; //actualizamos contador
 }
 
-int menuMarcador(tPuntuaciones &marcador,string nombreJug, int &pos){ //desarrollo de marcador
+int menuMarcador(string nombreJug){ //desarrollo de marcador
     int num=0;
-    if (buscar(marcador, nombreJug, pos)){
-        mostar_Minas_usuario(marcador, pos);
-    }
-    else{
-        cout << "Eres nuevo/a" << nombreJug << endl;
-        cout << "Mira las puntuaciones de otros jugadores!" <<endl;
-        mostrar_Alfabetico(marcador);
-        insertar(marcador, nombreJug, pos);
-    }
     system("pause");
     cout << nombreJug << ", ¿Que mina quier explorar?" <<endl;
     cout << "Introduce un numero entre 1 y 5 para explorar la mina o 0 para salir";
@@ -162,6 +153,7 @@ int menuMarcador(tPuntuaciones &marcador,string nombreJug, int &pos){ //desarrol
         cout << "ERROR, el numero introducido no es valido" << endl;
         cin >> num;
     }
+    return num;
 }
 
 void anadirDatos(tPuntuaciones &marcador, int Idmina, int numMov, int numGem, int numTNT, int puntos, int pos){
